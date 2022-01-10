@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {{ super() }}
-{% block content %}  
+{% block content %}
+{% for data in all_emps %}  
     <section>
       <div class="container-xxl">
         <div class="row">
@@ -9,22 +10,22 @@
                   <div class="col">
                     <h4>Name:</h4>
                     <br>
-                    <p>Test Test</p> 
+                    <p>{{ data.emp_name }}</p> 
                   </div>
                   <div class="col">
                     <h5>Age:</h5>
                     <br>
-                    <p>Test Test</p>
+                    <p>{{ data.emp_db }}</p>
                   </div>
                   <div class="col">
                     <h5>Salary:</h5>
                     <br>
-                    <p>Test Test</p>
+                    <p>{{ data.emp_salary }}</p>
                   </div>
                   <div class="col">
                     <h5>Department:</h5>
                     <br>
-                    <p>Test Test</p>
+                    <p>{{ data.emp_department }}</p>
                   </div>
                   <div class="col-2 align-items-end">
                     <a href="#">  
@@ -39,4 +40,5 @@
         </div>
       </div>
   </section>
+{% endfor %}
 {% endblock -%}

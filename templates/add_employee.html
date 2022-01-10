@@ -33,7 +33,11 @@
             </div>
             <div class="input-group mb-3">
                 <span class="input-group-text" id="inputGroup-sizing-default">Department:</span>
-                <select class="form-control" name="employee_department" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"></select>
+                <select class="form-control" name="employee_department" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                  {% for data in all_deps %}
+                  <option>{{ data.dep_name }}</option>
+                  {% endfor %}
+                </select>
             </div>
             <br>
             <div >

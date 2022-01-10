@@ -1,19 +1,20 @@
 {% extends 'base.html' %}
 {{ super() }}
 {% block content %}
+{% for data in all_deps %}
     <section>
         <div class="container-xxl">
           <div class="row">
             <span class="border border-dark border-2 rounded"  style="background-color: #D7D7D7;">
                 <div class="row">
                     <div class="col">
-                      <h3>Department name</h3> 
+                      <h3>{{data.dep_name}}</h3> 
                     </div>
                     <div class="col">
                       <h5>Number of workers</h5>
                     </div>
                     <div class="col">
-                      <h5>Avg salary</h5>
+                      <h5>Avg salary: {{salarys[data.dep_name]}}</h5>
                     </div>
                     <div class="col-2 align-items-end">
                       <a href="#">  
@@ -23,12 +24,11 @@
                         <img src = "../static/images/icons8-delete-24.svg", alt="Delete"> 
                       </a>
                     </div>
-                  </div>
-                  
+                  </div> 
                 <div class="row">
                     <div class="col">
                       <h5>Description:</h5><p>
-                        blablablablablablablaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadvnfksnshjgfbnfsgbnskbndkbngkfdbndbnkjbgdtjb djhhb gdjhb
+                        {{data.dep_description}}
                       </p>
                     </div>
                 </div>
@@ -36,73 +36,5 @@
           </div>
         </div>
     </section>
-    <section>
-      <div class="container-xxl">
-        <div class="row">
-          <span class="border border-dark border-2 rounded"  style="background-color: #D7D7D7;">
-              <div class="row">
-                  <div class="col">
-                    <h3>Department name</h3> 
-                  </div>
-                  <div class="col">
-                    <h5>Number of workers</h5>
-                  </div>
-                  <div class="col">
-                    <h5>Avg salary</h5>
-                  </div>
-                  <div class="col-2 align-items-end">
-                    <a href="#">  
-                      <img src = "../static/images/icons8-edit-24.svg", alt="Edit" style="padding-right: 60px"> 
-                    </a>
-                    <a href="#">
-                      <img src = "../static/images/icons8-delete-24.svg", alt="Delete"> 
-                    </a>
-                  </div>
-                </div>
-                
-              <div class="row">
-                  <div class="col">
-                    <h5>Description:</h5><p>
-                      blablablablablablablaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadvnfksnshjgfbnfsgbnskbndkbngkfdbndbnkjbgdtjb djhhb gdjhb
-                    </p>
-                  </div>
-              </div>
-          </span>
-        </div>
-      </div>
-  </section><section>
-    <div class="container-xxl">
-      <div class="row">
-        <span class="border border-dark border-2 rounded"  style="background-color: #D7D7D7;">
-            <div class="row">
-                <div class="col">
-                  <h3>Department name</h3> 
-                </div>
-                <div class="col">
-                  <h5>Number of workers</h5>
-                </div>
-                <div class="col">
-                  <h5>Avg salary</h5>
-                </div>
-                <div class="col-2 align-items-end">
-                  <a href="#">  
-                    <img src = "../static/images/icons8-edit-24.svg", alt="Edit" style="padding-right: 60px"> 
-                  </a>
-                  <a href="#">
-                    <img src = "../static/images/icons8-delete-24.svg", alt="Delete"> 
-                  </a>
-                </div>
-              </div>
-              
-            <div class="row">
-                <div class="col">
-                  <h5>Description:</h5><p>
-                    blablablablablablablaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadvnfksnshjgfbnfsgbnskbndkbngkfdbndbnkjbgdtjb djhhb gdjhb
-                  </p>
-                </div>
-            </div>
-        </span>
-      </div>
-    </div>
-</section>
+  {% endfor %}
 {% endblock -%}
