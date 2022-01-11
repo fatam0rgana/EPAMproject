@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{{ super() }}
+{% block content %}
+    <section>
+        <div class="container-xxl">
+          <div class="row">
+            <div class="col-8">
+              <h1>Add new employee</h1>
+            </div>
+            <div class="col-4"></div>
+          </div>
+        </div>
+      </section>
+      <section>
+        {% for cat, msg in get_flashed_messages(with_categories=true) %}
+        <div class="alert {{cat}}" role="alert">
+          {{msg}}
+        </div>
+        {% endfor %}
+        <form action = "/add_employee" method="post">
+        <div class="container-xxl">
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-default">Name:</span>
+                <input type="text" name="employee_name" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text">Salary:</span>
+                <input type="number" name="employee_salary" class="form-control" min="300" max="10000" step="50">
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text">Date of birth:</span>
+                <input type="date" name="employee_age" max="2023-01-01" min="1935-01-01" value="2000-11-17" class="form-control">
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-default">Department:</span>
+                <select class="form-control" name="employee_department" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                  {% for data in all_deps %}
+                  <option>{{ data.dep_name }}</option>
+                  {% endfor %}
+                </select>
+            </div>
+            <br>
+            <div >
+                <button type="submit" class="btn btn-success">Submit</button>
+            </div>
+        </div>
+      </form>
+    </section>
+    {% endblock -%}
+</body>
+</html>

@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{{ super() }}
+{% block content %}
+    <section>
+      <div class="container-xxl">
+        <div class="row">
+          <div class="col-8">
+            <h1>Welcome to Department Management App</h1>
+          </div>
+          <div class="col-4"></div>
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="container-xxl">
+        <div class="col-8">
+          <h3>With this app you can:</h3>
+            <ul>
+              <li><p>Display a list of departments and the average salary for these departments;</p></li>
+              <li><p>Display a list of employees in the department, his salary and personal data;</p></li>
+              <li><p>Search for employee or department using specified field;</p></li>
+              <li><p>Edit, add, delete data;</p></li>
+            </ul>
+        </div>
+      </div>
+    </section>
+  {% endblock -%}
+
+
