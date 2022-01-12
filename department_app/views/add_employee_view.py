@@ -14,6 +14,7 @@ dropdown = [{'name': 'Add department', 'url': 'add_department'}, {'name': 'Add e
 
 @app.route("/add_employee", methods = ['POST', 'GET'])
 def add_employee():
+    default = [['', '', '2000-11-17']]
     if request.method == 'POST':
         try:
             new_emp = Employees(emp_name = request.form['employee_name'], emp_db = request.form['employee_age'], emp_salary = request.form['employee_salary'], emp_department = request.form['employee_department'])
@@ -24,4 +25,4 @@ def add_employee():
         except:
             db.session.rollback()
             flash('error', 'alert-danger')
-    return render_template('add_employee.html', all_deps = Departments.query.all(), menu = menu, dropdown = dropdown, title = 'Add employee')
+    return render_template('add_employee.html', action = '/add_employee', default = default, all_deps = Departments.query.all(), menu = menu, dropdown = dropdown, title = 'Add employee')

@@ -13,6 +13,7 @@ dropdown = [{'name': 'Add department', 'url': 'add_department'}, {'name': 'Add e
 
 @app.route("/add_department", methods = ['POST', 'GET'])
 def add_department():
+    default = [['', '']]
     if request.method == 'POST':
         try:
             new_dep = Departments(dep_name = request.form['department_name'], dep_description = request.form['department_description'])
@@ -23,4 +24,4 @@ def add_department():
         except:
             db.session.rollback()
             flash('error', 'alert-danger')
-    return render_template('add_department.html', menu = menu, dropdown = dropdown, title = 'Add department')
+    return render_template('add_department.html', default = default, action = '/add_department',menu = menu, dropdown = dropdown, title = 'Add department')

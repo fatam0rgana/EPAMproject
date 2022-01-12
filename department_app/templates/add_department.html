@@ -17,16 +17,18 @@
           {{msg}}
         </div>
         {% endfor %}
-        <form action = "/add_department" method="post">
+        <form action = "{{ action }}" method="post">
         <div class="container-xxl">
+          {% for elem in default %}
             <div class="input-group mb-3">
                 <span class="input-group-text" id="inputGroup-sizing-default">Department name:</span>
-                <input type="text" name="department_name"class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                <input value="{{elem[0]}}" type="text" name="department_name"class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
             </div>
             <div class="input-group">
                 <span class="input-group-text">Department description:</span>
-                <textarea class="form-control" name="department_description" aria-label="With textarea"></textarea>
+                <textarea value="{{elem[1]}}" class="form-control" name="department_description" aria-label="With textarea"></textarea>
             </div>
+            {% endfor %}
             <br>
             <div >
                 <button type="submit" class="btn btn-success">Submit</button>

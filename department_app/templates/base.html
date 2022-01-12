@@ -23,7 +23,7 @@
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                   {% for m in menu -%}
                   <li class="nav-item">
-                    <a class="nav-link {{m.status}}" href="{{m.url}}">{{m.name}}</a>
+                    <a class="nav-link {{m.status}}" href="{{url_for(m.url)}}">{{m.name}}</a>
                   </li>
                   {% endfor -%}
                   <li class="nav-item dropdown">
@@ -32,7 +32,7 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                       {% for d in dropdown -%}
-                      <li><a class="dropdown-item" href="{{d.url}}">{{d.name}}</a></li>
+                      <li><a class="dropdown-item" href="{{url_for(d.url)}}">{{d.name}}</a></li>
                       {% endfor -%}
                     </ul>
                   </li>

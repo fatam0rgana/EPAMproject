@@ -2,7 +2,7 @@
 {{ super() }}
 {% block content %}
 {% for data in all_emps %}  
-    <section>
+    <section id="section-{{data.id}}">
       <div class="container-xxl">
         <div class="row">
           <span class="border border-dark border-2 rounded"  style="background-color: #D7D7D7;">
@@ -27,11 +27,13 @@
                     <br>
                     <p>{{ data.emp_department }}</p>
                   </div>
-                  <div class="col-2 align-items-end">
-                    <a href="#">  
+                  <div class="col-1 align-items-end">
+                    <a id="edit-{{data.id}}" href="employees/edit/{{data.id}}">  
                       <img src = "../static/images/icons8-edit-24.svg", alt="Edit" style="padding-right: 60px"> 
                     </a>
-                    <a href="#">
+                  </div>
+                  <div class="col-1 align-items-end">
+                    <a id="delete-{{data.id}}" href="employees/delete/{{data.id}}">
                       <img src = "../static/images/icons8-delete-24.svg", alt="Delete"> 
                     </a>
                   </div>

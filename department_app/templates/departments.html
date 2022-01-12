@@ -1,6 +1,11 @@
 {% extends 'base.html' %}
 {{ super() }}
 {% block content %}
+{% for cat, msg in get_flashed_messages(with_categories=true) %}
+    <div class="alert {{cat}}" role="alert">
+    {{msg}}
+    </div>
+{% endfor %}
 {% for data in all_deps %}
     <section>
         <div class="container-xxl">
@@ -17,10 +22,10 @@
                       <h5>Avg salary: {{characteristics[data.dep_name][0]}}</h5>
                     </div>
                     <div class="col-2 align-items-end">
-                      <a href="#">  
+                      <a id="edit-{{data.id}}" href="departments/edit/{{data.id}}">  
                         <img src = "../static/images/icons8-edit-24.svg", alt="Edit" style="padding-right: 60px"> 
                       </a>
-                      <a href="#">
+                      <a id="delete-{{data.id}}" href="departments/delete/{{data.id}}">
                         <img src = "../static/images/icons8-delete-24.svg", alt="Delete"> 
                       </a>
                     </div>
