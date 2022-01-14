@@ -13,3 +13,5 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 from .views import homepage_view, employees_view, add_employee_view, add_department_view, departments_view
+
+from .rest import department_api, employee_api

@@ -20,7 +20,7 @@ class Departments(db.Model):
 
 class DepartmentsSchema(ma.Schema):
     class Meta:
-        fields = ('dep_name', 'dep_description')
+        fields = ('id', 'dep_name', 'dep_description')
 
 department_schema = DepartmentsSchema(many=False)
 departments_schema = DepartmentsSchema(many=True)

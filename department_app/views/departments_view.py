@@ -42,14 +42,19 @@ def delete_department(dep_id):
 
 @app.route("/departments/edit/<int:dep_id>", methods = ['POST', 'GET'])
 def edit_department(dep_id):
+
     department = Departments.query.get_or_404(dep_id)
     default = [[department.dep_name, department.dep_description]]
+
     if request.method == 'POST':
         employees_in_dep = Employees.query.filter_by(emp_department = department.dep_name)
         department.dep_name = request.form['department_name'] 
         department.dep_description = request.form['department_description']
+        
         for employee in employees_in_dep:
             employee.emp_department = department.dep_name
+            
         db.session.commit()
         return redirect(url_for('departments'))
+        
     return render_template('add_department.html', default = default, action = f'/departments/edit/{dep_id}', menu = menu, dropdown = dropdown, title = 'Edit department')
