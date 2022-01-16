@@ -21,7 +21,7 @@ class Employees(db.Model):
 
 class EmployeesSchema(ma.Schema):
     class Meta:
-        fields = ('emp_name', 'emp_db', 'emp_salary', 'emp_department')
+        fields = ('id', 'emp_name', 'emp_db', 'emp_salary', 'emp_department')
 
 employee_schema = EmployeesSchema(many=False)
 employees_schema = EmployeesSchema(many=True)

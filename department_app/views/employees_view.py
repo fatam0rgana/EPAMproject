@@ -2,22 +2,17 @@ import os
 from re import template
 import sys
 from flask import render_template, url_for, flash, request, redirect
-import datetime
+
 
 sys.path.append(os.path.abspath(os.path.join('..')))
 
 from department_app import app, db
 from department_app.models.employee_model import Employees
 from department_app.models.department_model import Departments
-
+from department_app.service.common_funcs import count_age
 
 menu = [{'name': 'Departments', 'url': 'departments', 'status': ''}, {'name': 'Employees', 'url': 'employees', 'status': 'active'}]
-dropdown = [{'name': 'Add department', 'url': 'add_department'}, {'name': 'Add employee', 'url': 'add_employee'}]
-
-def count_age(emp):
-    temp = datetime.datetime.strptime(Employees.query.filter_by(id = emp).first().emp_db, "%Y-%m-%d")
-    today = datetime.date.today()
-    return today.year - temp.year - ((today.month, today.day) < (temp.month, temp.day)) 
+dropdown = [{'name': 'Add department', 'url': 'add_department'}, {'name': 'Add employee', 'url': 'add_employee'}] 
 
 
 @app.route("/employees")
