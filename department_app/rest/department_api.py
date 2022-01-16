@@ -4,7 +4,7 @@ from flask import Flask, jsonify, request
 
 from department_app.models.department_model import Departments, DepartmentsSchema
 from department_app.models.employee_model import Employees, EmployeesSchema
-
+from department_app.service.common_funcs import count_avg_and_amount
 
 sys.path.append(os.path.abspath(os.path.join('..')))
 
@@ -42,7 +42,6 @@ def api_edit_department(dep_id):
     
     department = Departments.query.get_or_404(dep_id)
     employees_in_dep = Employees.query.filter_by(emp_department = department.dep_name)
-
     department.dep_name = request.json['dep_name']
     department.dep_description = request.json['dep_description']
 
@@ -51,4 +50,19 @@ def api_edit_department(dep_id):
     
     db.session.commit()
 
+    return jsonify(departments_schema.dump(Departments.query.all()))
+
+
+#delete department
+@app.route("/api/departments/delete/<int:dep_id>", methods=['DELETE'])
+def api_delete_department(dep_id):
+
+    department = Departments.query.get_or_404(dep_id)
+
+    if count_avg_and_amount(department.dep_name)[1]:
+        return jsonify({'Error': f'You have {count_avg_and_amount(department.dep_name)[1]} workers in the department. Please move or delete them.'})
+    else:    
+        db.session.delete(department)
+        db.session.commit()
+        
     return jsonify(departments_schema.dump(Departments.query.all()))
