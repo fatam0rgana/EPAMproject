@@ -1,7 +1,10 @@
 from department_app.models.department_model import Departments
 from department_app.models.employee_model import Employees
 import datetime
+import os
+import sys
 
+sys.path.append(os.path.abspath(os.path.join('..')))
 
 #function that counts amount of workers and their avg age for department
 def count_avg_and_amount(dep):

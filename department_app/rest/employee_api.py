@@ -4,8 +4,7 @@ from flask import Flask, jsonify, request
 
 from department_app.models.department_model import Departments, DepartmentsSchema
 from department_app.models.employee_model import Employees, EmployeesSchema
-from department_app.service.common_funcs import get_all_deps
-from department_app.views.employees_view import employees
+from department_app.service.validation import validate_employee_data
 
 sys.path.append(os.path.abspath(os.path.join('..')))
 
@@ -20,10 +19,12 @@ employee_schema = EmployeesSchema(many=False)
 def api_add_employees():
     try:
         new_emp = Employees(emp_name = request.json['emp_name'], emp_db = request.json['emp_db'], emp_salary = request.json['emp_salary'], emp_department = request.json['emp_department'])
-        if new_emp.emp_department not in get_all_deps():
-            return jsonify({'Error': 'choose existing department name'})
-        db.session.add(new_emp)
-        db.session.commit()
+        validation = validate_employee_data(new_emp.emp_name, new_emp.emp_db, new_emp.emp_salary, new_emp.emp_department)
+        if validation[0]:
+            db.session.add(new_emp)
+            db.session.commit()
+        else:
+            return jsonify({"Error": f"Invalid {validation[1]}"})
         return employee_schema.jsonify(new_emp)
     except Exception as e:
         return jsonify({"Error": "Invalid data"})
@@ -47,10 +48,12 @@ def api_edit_employee(emp_id):
     employee.emp_salary = request.json['emp_salary']
     employee.emp_department = request.json['emp_department']
 
-    if employee.emp_department not in get_all_deps():
-            return jsonify({'Error': 'choose existing department name'})
+    validation = validate_employee_data(employee.emp_name, employee.emp_db, employee.emp_salary, employee.emp_department)
+    if validation[0]:
+        db.session.commit()
+    else:
+        return jsonify({"Error": f"Invalid {validation[1]}"})
     
-    db.session.commit()
     return jsonify(employees_schema.dump(Employees.query.all()))
 
 #delete employee

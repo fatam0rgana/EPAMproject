@@ -5,7 +5,7 @@ from flask import Flask, jsonify, request
 from department_app.models.department_model import Departments, DepartmentsSchema
 from department_app.models.employee_model import Employees, EmployeesSchema
 from department_app.service.common_funcs import count_avg_and_amount
-
+from department_app.service.validation import validate_department_data
 sys.path.append(os.path.abspath(os.path.join('..')))
 
 from department_app import db, app
@@ -19,9 +19,12 @@ department_schema = DepartmentsSchema(many=False)
 def api_add_departments():
     try:
         new_dep = Departments(dep_name = request.json['dep_name'], dep_description = request.json['dep_description'])
-        db.session.add(new_dep)
-        db.session.commit()
-
+        validation = validate_department_data(new_dep.dep_name, new_dep.dep_description)
+        if validation[0]:
+            db.session.add(new_dep)
+            db.session.commit()
+        else:
+            return jsonify({"Error": f"Invalid {validation[1]}"})
         return department_schema.jsonify(new_dep)
 
     except Exception as e:
@@ -44,11 +47,13 @@ def api_edit_department(dep_id):
     employees_in_dep = Employees.query.filter_by(emp_department = department.dep_name)
     department.dep_name = request.json['dep_name']
     department.dep_description = request.json['dep_description']
-
-    for employee in employees_in_dep:
+    validation = validate_department_data(department.dep_name, department.dep_description)
+    if validation[0]:
+        for employee in employees_in_dep:
             employee.emp_department = department.dep_name
-    
-    db.session.commit()
+        db.session.commit()
+    else:
+        return jsonify({"Error": f"Invalid {validation[1]}"})
 
     return jsonify(departments_schema.dump(Departments.query.all()))
 
