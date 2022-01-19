@@ -6,7 +6,7 @@ from department_app.models.employee_model import Employees
 
 class TestEmployeeView(BaseTestCase):
     """
-    This is the class for home_page view test case
+    This is the class for departments view test case
     """
 
     def test_employee_page(self):
@@ -48,3 +48,6 @@ class TestEmployeeView(BaseTestCase):
         response2 = client.get('/employees/delete/2')
         assert response1.status_code == http.HTTPStatus.FOUND
         assert response2.status_code == http.HTTPStatus.NOT_FOUND
+
+
+    

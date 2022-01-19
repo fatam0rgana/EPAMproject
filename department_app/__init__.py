@@ -1,12 +1,17 @@
+import department_app.config as config
+import os
+import sys
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
 
+sys.path.append(os.path.abspath(os.path.join('..')))
+
+
+
 #setting configuration
 app = Flask(__name__)
-app.config['SECRET_KEY'] = "adnjkfvfdankvfadkb"
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///sql/department.db'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config.from_object(config)
 
 
 #creating db
