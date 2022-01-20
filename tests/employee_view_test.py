@@ -11,9 +11,7 @@ class TestEmployeeView(BaseTestCase):
 
     def test_employee_page(self):
         """
-
         Testing /employees page 
-        
         """
         client = app.test_client()
         response1 = client.get('/employees')
@@ -22,7 +20,7 @@ class TestEmployeeView(BaseTestCase):
 
     def test_employee_edit(self):
         """
-        Testing employee edit function
+        Testing employee edit page
         """
 
         client = app.test_client()
@@ -30,14 +28,13 @@ class TestEmployeeView(BaseTestCase):
         db.session.add(test_emp)
         db.session.commit()
         response1 = client.get('/employees/edit/1')
-        response2 = client.get('/employees/edit/2')
         assert response1.status_code == http.HTTPStatus.OK
-        assert response2.status_code == http.HTTPStatus.NOT_FOUND
+        with self.assertRaises(Exception): client.get('/employees/delete/2')
     
 
     def test_employee_delete(self):
         """
-        Testing employee deletion
+        Testing employee deletion page
         """
 
         client = app.test_client()
@@ -45,9 +42,18 @@ class TestEmployeeView(BaseTestCase):
         db.session.add(test_emp)
         db.session.commit()
         response1 = client.get('/employees/delete/1')
-        response2 = client.get('/employees/delete/2')
         assert response1.status_code == http.HTTPStatus.FOUND
-        assert response2.status_code == http.HTTPStatus.NOT_FOUND
+        with self.assertRaises(Exception): client.get('/employees/delete/2')
+    
 
+    def test_employee_add(self):
+        """
+        Testing /add_employee page
+        """
+        client = app.test_client()
+        response1 = client.get('/add_employee')
+        assert response1.status_code == http.HTTPStatus.OK
+        
+    
 
     
