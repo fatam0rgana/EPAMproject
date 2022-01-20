@@ -5,10 +5,6 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
 
-sys.path.append(os.path.abspath(os.path.join('..')))
-
-
-
 #setting configuration
 app = Flask(__name__)
 app.config.from_object(config)

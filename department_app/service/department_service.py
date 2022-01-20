@@ -1,6 +1,6 @@
 import os
 import sys
-from flask import render_template, url_for, flash, request, redirect
+from flask import flash, request, redirect
 
 sys.path.append(os.path.abspath(os.path.join('..')))
 
@@ -20,7 +20,7 @@ def add_department_func(name, description):
         if validation[0]:
             db.session.add(new_dep)
             db.session.commit()
-            flash(f"{request.form['department_name']} added", 'alert-success')
+            #flash(f"{request.form['department_name']} added", 'alert-success')
         else:
             db.session.rollback()
             flash(f'Error: Invalid {validation[1]}', 'alert-danger')

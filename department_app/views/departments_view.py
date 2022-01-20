@@ -8,7 +8,6 @@ from department_app import app, db
 from department_app.models.employee_model import Employees
 from department_app.models.department_model import Departments
 from department_app.service.common_funcs import count_avg_and_amount
-from department_app.service.validation import validate_department_data
 from department_app.service.department_service import delete_department_func, edit_department_func
 
 
