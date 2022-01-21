@@ -1,7 +1,7 @@
 import http
 
 from department_app import app
-from .base_test import BaseTestCase
+from tests.base_test import BaseTestCase
 
 
 class TestBaseView(BaseTestCase):

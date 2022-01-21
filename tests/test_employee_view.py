@@ -1,7 +1,7 @@
 import http
 
 from department_app import app, db
-from .base_test import BaseTestCase
+from tests.base_test import BaseTestCase
 from department_app.models.employee_model import Employees
 
 class TestEmployeeView(BaseTestCase):
@@ -61,7 +61,6 @@ class TestEmployeeView(BaseTestCase):
         """
         client = app.test_client()
         response1 = client.post('/employees/search_by_name')
-        print(response1)
         #Must return bad request because no search string presented
         assert response1.status_code == http.HTTPStatus.BAD_REQUEST
 

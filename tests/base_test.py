@@ -3,7 +3,6 @@ import os
 import sys
 from department_app import app, db
 
-sys.path.insert(0, '/path/to/application/app/folder')
 
 class BaseTestCase(unittest.TestCase):
     """

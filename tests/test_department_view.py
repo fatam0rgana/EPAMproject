@@ -2,8 +2,7 @@ import http
 from urllib import response
 
 from department_app import app, db
-#from department_app.views.departments_view import 
-from .base_test import BaseTestCase
+from tests.base_test import BaseTestCase
 from department_app.models.department_model import Departments
 from department_app.service.department_service import add_department_func
 

@@ -2,7 +2,7 @@ import http
 import json
 
 from department_app import app, db
-from .base_test import BaseTestCase
+from tests.base_test import BaseTestCase
 from department_app.models.employee_model import Employees
 from department_app.models.department_model import Departments
 

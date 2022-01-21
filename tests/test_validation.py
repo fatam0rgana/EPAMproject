@@ -1,10 +1,8 @@
 import os
 import sys
+
 from department_app import app, db
-from .base_test import BaseTestCase
-
-sys.path.append(os.path.abspath(os.path.join('..')))
-
+from tests.base_test import BaseTestCase
 from department_app.models.employee_model import Employees
 from department_app.service.department_service import add_department_func
 from department_app.service.validation import *
