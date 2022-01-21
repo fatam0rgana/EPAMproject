@@ -55,5 +55,14 @@ class TestEmployeeView(BaseTestCase):
         assert response1.status_code == http.HTTPStatus.OK
         
     
+    def test_employee_search(self):
+        """
+        Testing search_employee page
+        """
+        client = app.test_client()
+        response1 = client.post('/employees/search_by_name')
+        print(response1)
+        #Must return bad request because no search string presented
+        assert response1.status_code == http.HTTPStatus.BAD_REQUEST
 
     

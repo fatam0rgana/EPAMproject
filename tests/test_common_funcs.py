@@ -7,7 +7,7 @@ sys.path.append(os.path.abspath(os.path.join('..')))
 
 from department_app.service.department_service import add_department_func
 from department_app.service.employee_service import add_employee_func
-from department_app.service.common_funcs import count_age, count_avg_and_amount, get_all_deps
+from department_app.service.common_funcs import count_age, count_avg_and_amount, get_all_deps, search_by_name_func
 
 
 class TestCommonFuncs(BaseTestCase):
@@ -42,3 +42,15 @@ class TestCommonFuncs(BaseTestCase):
         add_department_func('First', '')
         add_department_func('Second', '')
         self.assertEqual(['First', 'Second'], get_all_deps())
+    
+    
+    def test_search(self):
+        """
+        Testing search function
+        """
+        add_department_func('First', '')
+        add_employee_func('Vanya', '2000-01-01', 1000, 'First')
+        add_employee_func('Vasya', '1999-01-01', 1500, 'First')
+        self.assertEqual(0, search_by_name_func('qwe'))
+        self.assertEqual(0, search_by_name_func('!@R'))
+        self.assertEqual('Vanya', search_by_name_func('V')[0].emp_name)
