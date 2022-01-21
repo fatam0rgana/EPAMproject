@@ -37,8 +37,8 @@
                     </ul>
                   </li>
                 </ul>
-                <form class="d-flex">
-                  <input class="form-control me-2" type="search" placeholder="Search for department or employee" aria-label="Search">
+                <form class="d-flex" method="POST" action="{{url_for('search_by_name')}}">
+                  <input name="search_str" class="form-control me-2" type="text" placeholder="Search for employee" >
                   <button class="btn btn-outline-success" type="submit">Search</button>
                 </form>
               </div>

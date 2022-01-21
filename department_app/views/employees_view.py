@@ -8,12 +8,12 @@ sys.path.append(os.path.abspath(os.path.join('..')))
 from department_app import app, db
 from department_app.models.employee_model import Employees
 from department_app.models.department_model import Departments
-from department_app.service.common_funcs import count_age
+from department_app.service.common_funcs import count_age, search_by_name_func
 from department_app.service.employee_service import delete_employee_func, edit_employee_func
 
 menu = [{'name': 'Departments', 'url': 'departments', 'status': ''}, {'name': 'Employees', 'url': 'employees', 'status': 'active'}]
 dropdown = [{'name': 'Add department', 'url': 'add_department'}, {'name': 'Add employee', 'url': 'add_employee'}] 
-
+search = 'search_by_name'
 
 #page of all employees
 @app.route("/employees")
@@ -46,3 +46,15 @@ def edit_employee(emp_id):
 
     return render_template('add_employee.html', action = f'/employees/edit/{emp_id}', default = default, all_deps = Departments.query.all(), menu = menu, dropdown = dropdown, title = 'Edit employee')
     
+
+#Searching function
+@app.route("/employees/search_by_name", methods = ['POST'])
+def search_by_name():
+    search_str = request.form['search_str']
+    result = search_by_name_func(search_str)
+    if result: 
+        age = {elem.id: count_age(elem.id) for elem in result}
+    else:
+        raise Exception('Search query must only incluse letters')
+        
+    return render_template('employees.html', all_emps = result, age = age, menu = menu, dropdown = dropdown, title = 'Employees found')
