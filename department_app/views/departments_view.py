@@ -19,7 +19,6 @@ dropdown = [{'name': 'Add department', 'url': 'add_department'}, {'name': 'Add e
 @app.route("/departments")
 def departments():
     salary_and_amount  = {elem.dep_name: count_avg_and_amount(elem.dep_name) for elem in Departments.query.all()}
-    print(salary_and_amount)
     return render_template('departments.html', all_deps = Departments.query.all(), characteristics = salary_and_amount, menu = menu, dropdown = dropdown)
 
 
