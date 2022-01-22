@@ -35,8 +35,9 @@ def get_all_deps():
 
 #Function searches for employees by name
 def search_by_name_func(search_string):
-    if search_string not in string.ascii_letters:
-        return 0
+    for letter in search_string:
+        if letter not in string.ascii_letters:
+            raise Exception('Search query must only incluse letters')
     res = []
     for employee in Employees.query.all():
         if search_string in employee.emp_name:

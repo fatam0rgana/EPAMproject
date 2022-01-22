@@ -51,10 +51,7 @@ def edit_employee(emp_id):
 @app.route("/employees/search_by_name", methods = ['POST'])
 def search_by_name():
     search_str = request.form['search_str']
-    result = search_by_name_func(search_str)
-    if result: 
-        age = {elem.id: count_age(elem.id) for elem in result}
-    else:
-        raise Exception('Search query must only incluse letters')
-        
+    result = search_by_name_func(search_str) 
+    age = {elem.id: count_age(elem.id) for elem in result}
+    
     return render_template('employees.html', all_emps = result, age = age, menu = menu, dropdown = dropdown, title = 'Employees found')

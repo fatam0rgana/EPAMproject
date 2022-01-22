@@ -49,6 +49,6 @@ class TestCommonFuncs(BaseTestCase):
         add_department_func('First', '')
         add_employee_func('Vanya', '2000-01-01', 1000, 'First')
         add_employee_func('Vasya', '1999-01-01', 1500, 'First')
-        self.assertEqual(0, search_by_name_func('qwe'))
-        self.assertEqual(0, search_by_name_func('!@R'))
+        self.assertEqual([], search_by_name_func('qwe'))
+        with self.assertRaises(Exception): search_by_name_func('!@R')
         self.assertEqual('Vanya', search_by_name_func('V')[0].emp_name)
